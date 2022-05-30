@@ -14,30 +14,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 const productCollection = client.db('best_electric-tools').collection('purchase')
 
-async function run(){
-  try{
-    await client.connect();
-    console.log('connect');
 
-    app.get('/allProducts', async(req,res)=>{
-      const products = await productCollection.find({}).toArray()
-      res.send(products)
-    })
-
-    app.get('/singleProduct', async(req,res)=>{
-      const id = req.query.id;
-      const filter = {_id: ObjectId(id)}
-      const singleProduct =await productCollection.findOne(filter)
-      res.send(singleProduct)
-
-    })
-
-  }
-  finally{
-
-
-  }
-}
 
 run().catch(console.dir);
 
