@@ -14,7 +14,24 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 const productCollection = client.db('best_electric-tools').collection('purchase')
 
+async function run(){
+  try{
+    await client.connect();
+    console.log('connect');
 
+    app.get('/allProducts', async(req,res)=>{
+      const products = await productCollection.find({}).toArray()
+      res.send(products)
+    })
+
+   
+
+  }
+  finally{
+
+
+  }
+}
 
 run().catch(console.dir);
 
